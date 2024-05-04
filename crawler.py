@@ -15,7 +15,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 url = 'https://map.kakao.com/'
 driver = webdriver.Chrome() # 크롬창 숨기기
 driver.get(url)
-key_word = '부산대 식당'  # 검색어
+key_word = '부산 금정구 부산대학교 주변 식당'  # 검색어
 
 # css 찾을때 까지 10초대기
 def time_wait(num, code):
@@ -32,24 +32,26 @@ def parking_list_print():
 
     time.sleep(0.2)
 
-		# (3) 장소 목록
+	# (3) 장소 목록
     parking_list = driver.find_elements(By.CSS_SELECTOR, '.placelist > .PlaceItem')
+    names = driver.find_elements(By.CSS_SELECTOR, '.head_item > .tit_name > .link_name')
+    types = driver.find_elements(By.CSS_SELECTOR, '.head_item > .subcategory')
+    address_list = driver.find_elements(By.CSS_SELECTOR, '.info_item > .addr')
+    rating = driver.find_elements(By.CSS_SELECTOR, '.rating > .score > .num')
+    counts = driver.find_elements(By.CSS_SELECTOR, '.rating > .review')
 
     for index in range(len(parking_list)):
         print(index)
 
 		# (4) 장소명
-        names = driver.find_elements(By.CSS_SELECTOR, '.head_item > .tit_name > .link_name')
         restaurant_name = names[index].text
         print(restaurant_name)
 
 		# (5) 장소 유형
-        types = driver.find_elements(By.CSS_SELECTOR, '.head_item > .subcategory')
         restaurant_type = types[index].text
         print(restaurant_type)
 
 		# (6) 주소
-        address_list = driver.find_elements(By.CSS_SELECTOR, '.info_item > .addr')
         address = address_list.__getitem__(index).find_elements(By.CSS_SELECTOR, 'p')
         
         new_addr = address.__getitem__(0).text
@@ -59,29 +61,30 @@ def parking_list_print():
         print(old_addr)
 
         # (7) 별점
-        rating = driver.find_elements(By.CSS_SELECTOR, '.rating > .score > .num')
-        averageScore = rating[index].text
-        print(averageScore)
+        
+        average_score = rating[index].text
+        print(average_score)
 
         # (8) 리뷰 개수
-        counts = driver.find_elements(By.CSS_SELECTOR, '.rating > .review')
-        reviewCount = counts[index].text
-        reviewCount = reviewCount[3:]
-        print(reviewCount)
+        
+        review_count = counts[index].text
+        review_count = review_count[3:]
+        print(review_count)
 
         # dict에 데이터 집어넣기
         dict_temp = {
             'name': restaurant_name,
             'restaurant_type': restaurant_type,
+            'averageScore': average_score,
+            'normScore' : "norm_score", # 추가 예정
+            'reviewCount': review_count,
             'address1': new_addr,
-            'address2': old_addr,
-            'averageScore': averageScore,
-            'reviewCount': reviewCount
+            'address2': old_addr
         }
 
         restaurant_dict['식당 정보'].append(dict_temp)
         print(f'{restaurant_name} ...완료')
-
+        
 # css를 찾을때 까지 10초 대기
 time_wait(10, 'div.box_searchbar > input.query')
 
