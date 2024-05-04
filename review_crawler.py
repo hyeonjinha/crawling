@@ -23,14 +23,13 @@ def review_print():
     # css를 찾을때 까지 10초 대기
     time_wait(10, '#mArticle > div.cont_essential > div:nth-child(1) > div.place_details')
     driver.find_element(By.XPATH, '//*[@id="mArticle"]/div[1]/div[1]/div[2]/div/div[2]/a[2]').send_keys(Keys.ENTER)
-    more = (driver.find_element(By.XPATH, '//*[@id="mArticle"]/div[7]/div[3]/a')).text
-    
+    more = (driver.find_element(By.CSS_SELECTOR, '#mArticle > div.cont_evaluation > div.evaluation_review > .link_more')).text
     while(more != "후기 접기"):
-        driver.find_element(By.XPATH, '//*//*[@id="mArticle"]/div[7]/div[3]/a').send_keys(Keys.ENTER)
-        more = (driver.find_element(By.XPATH, '//*[@id="mArticle"]/div[7]/div[3]/a')).text
+        driver.find_element(By.CSS_SELECTOR,'#mArticle > div.cont_evaluation > div.evaluation_review > .link_more').send_keys(Keys.ENTER)
+        more = (driver.find_element(By.CSS_SELECTOR, '#mArticle > div.cont_evaluation > div.evaluation_review > .link_more')).text
+        print(more)
         time.sleep(0.3)
-
-    print("후기 더보기 완료")
+    
     
 def review_crawler():
     # 리뷰어 정보
@@ -49,20 +48,13 @@ def review_crawler():
 
     # 유저 레벨
     user_levels = driver.find_elements(By.CSS_SELECTOR, '.unit_info > .link_user > .inner_user > .badge_info > .txt_badge')
-    #user_id = review_list.get_attribute('data-userid')
-    #user_score = driver.find_elements(By.CSS_SELECTOR, '.evaluation_review > .list_evaluation > li')
-    
-    #user_info = driver.find_element(By.CSS_SELECTOR, '.evaluation_review > .list_evaluation > li > .star_info > .ico_star inner_star')
-    '''user_avg_score = user[0]
-    user_total_review = user[1]'''
 
-    #user_description = driver.find_element(By.CSS_SELECTOR, '.evaluation_review > .list_evaluation > li > .comment_info > .txt_comment')
     i = 0
     user_review_cnt_index = 0
     user_review_avg_index = 1
     for i in range(len(review_list)):
         print(f"review_list{i} 출력")
-        
+
         #유저 아이디
         user_id = review_list[i].get_attribute('data-userid')
         print(user_id)
@@ -129,7 +121,7 @@ def review_crawler():
         print(f'{user_name} ...완료')
 
         # 유저별 리뷰 모으기
-        profile_info = user_profiles[i].click()
+        #profile_info = user_profiles[i].click()
 
         i += 1
         user_review_cnt_index = i * 2
