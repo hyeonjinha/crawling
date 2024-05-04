@@ -4,7 +4,7 @@
             "reviewScore": 1,
             "description": "화장실 청소좀 해주세요 ㅠ 구석구석에 거미줄 있고 오래된 휴지 부스러기 바닥에 가득… 화장실이\n저러니 주방도 깨끗할지 의심됩니다 ㅜ",
             "normScore": "normScore",
-            "userId": "932889409",
+            "userId": null,
             "restaurnatId": "restaurant_id",
             "level": "5",
             "createAt": "2024.05.04."
@@ -13,7 +13,7 @@
             "reviewScore": 2,
             "description": "",
             "normScore": "normScore",
-            "userId": "1699970031",
+            "userId": null,
             "restaurnatId": "restaurant_id",
             "level": "1",
             "createAt": "2024.04.13."
@@ -22,7 +22,7 @@
             "reviewScore": 5,
             "description": "디저트 괜찮고 음료 종류가 다양해서 좋아요 특히 차 종류 다양해서 골라먹을 수 있어 좋습니다.",
             "normScore": "normScore",
-            "userId": "3283943179",
+            "userId": null,
             "restaurnatId": "restaurant_id",
             "level": "5",
             "createAt": "2024.03.02."
@@ -31,7 +31,7 @@
             "reviewScore": 5,
             "description": "",
             "normScore": "normScore",
-            "userId": "2260215692",
+            "userId": null,
             "restaurnatId": "restaurant_id",
             "level": "3",
             "createAt": "2024.01.10."
@@ -40,7 +40,7 @@
             "reviewScore": 5,
             "description": "",
             "normScore": "normScore",
-            "userId": "776132433",
+            "userId": null,
             "restaurnatId": "restaurant_id",
             "level": "61",
             "createAt": "2023.10.20."
@@ -49,7 +49,7 @@
             "reviewScore": 1,
             "description": "불친절함.",
             "normScore": "normScore",
-            "userId": "1695228491",
+            "userId": null,
             "restaurnatId": "restaurant_id",
             "level": "21",
             "createAt": "2023.10.13."
@@ -58,7 +58,7 @@
             "reviewScore": 2,
             "description": "케이크랑 커피는 맛있었는데 포스기 찍는 여자 직원분이 너무 불친절해서 좀 그랬습니다🥲 주문받으실때 면전에 대고 한숨을 푹 내쉬던데 아무리 단체 손님이라 해도 그런 태도는 조금 아닌것같아요",
             "normScore": "normScore",
-            "userId": "2030169978",
+            "userId": null,
             "restaurnatId": "restaurant_id",
             "level": "12",
             "createAt": "2023.05.21."
@@ -67,7 +67,7 @@
             "reviewScore": 4,
             "description": "피스타치오 라즈베리? 인가 진짜 너무너무 맛있었다,,,,,",
             "normScore": "normScore",
-            "userId": "948555574",
+            "userId": null,
             "restaurnatId": "restaurant_id",
             "level": "46",
             "createAt": "2023.05.03."
@@ -76,7 +76,7 @@
             "reviewScore": 5,
             "description": "로스팅 대회에서 상받으신 분이 일하신다고 들었어요. 엄청 맛납니다. 커피 전문이라고해서 디저트가 허술하지 않아요 진짜 디저트도 엄청 맛있습니다",
             "normScore": "normScore",
-            "userId": "418944332",
+            "userId": null,
             "restaurnatId": "restaurant_id",
             "level": "18",
             "createAt": "2023.03.23."
@@ -85,7 +85,7 @@
             "reviewScore": 5,
             "description": "좋아요!",
             "normScore": "normScore",
-            "userId": "1208943632",
+            "userId": null,
             "restaurnatId": "restaurant_id",
             "level": "32",
             "createAt": "2023.02.05."
@@ -94,7 +94,7 @@
             "reviewScore": 1,
             "description": "머리 짧은 여자 직원 진짜 싸가지없어요 음료는 맛있습니다",
             "normScore": "normScore",
-            "userId": "1346078336",
+            "userId": null,
             "restaurnatId": "restaurant_id",
             "level": "14",
             "createAt": "2022.10.24."
@@ -103,7 +103,7 @@
             "reviewScore": 5,
             "description": "카공 성지",
             "normScore": "normScore",
-            "userId": "1397047714",
+            "userId": null,
             "restaurnatId": "restaurant_id",
             "level": "33",
             "createAt": "2022.09.02."
@@ -112,7 +112,7 @@
             "reviewScore": 3,
             "description": "3층으로 구성되어 있고 층층마다 화장실이 있다는 점, 디저트등의 종류가 다양한 점 및 가격대가 높은 편이 아니란 점은 좋음.\n(맛은 엄청 맛있는건 아니고 그냥 무난했음)\n(스윗밀크티는 가루에 뜨거운물 부은것 같은 맛이었음)\n\n손님이 많아서 그런지 공기가 답답했음. 또한 좌석들 간에 간격이 좁아서 더 갑갑하게 느껴졌음. \n의자와 책상은 공부나 노트북하기 편안한것 같은데, 공간자체가 그닥.. 그러고 싶지 않았음.\n\n여튼 또 오고 싶은 곳은 아님. 한번 온걸로 만족함.",
             "normScore": "normScore",
-            "userId": "352629027",
+            "userId": null,
             "restaurnatId": "restaurant_id",
             "level": "19",
             "createAt": "2022.03.25."
@@ -121,7 +121,7 @@
             "reviewScore": 4,
             "description": "",
             "normScore": "normScore",
-            "userId": "1290983521",
+            "userId": null,
             "restaurnatId": "restaurant_id",
             "level": "38",
             "createAt": "2021.12.10."
@@ -130,7 +130,7 @@
             "reviewScore": 5,
             "description": "우연히 갔는데 맛있고 친절해서 좋았어요~",
             "normScore": "normScore",
-            "userId": "1046245882",
+            "userId": null,
             "restaurnatId": "restaurant_id",
             "level": "21",
             "createAt": "2021.12.05."
@@ -139,7 +139,7 @@
             "reviewScore": 1,
             "description": "남자친구가 여기 카카오블렌디드 너무 좋아하고 극찬을해서 방문했습니다. 가격대나 커피도 맛있고 잠봉뵈르도 딱딱한 바게트 빼고 가격대비 괜찮았으나 정말 주문받던 직원분 태도가 다신 오고싶지않을 정도입니다. 안경낀 여성분, \"안에서 먹고가실거면 전화하시거나 방문자 등록하세요, 수기작성하실거면 신분증주세요.\" 글로만 보면 이게 뭐가 문제일까 싶겠지만 말투부터 표정까지 정말 기분 나빴습니다. 그래도 참고 주문하려고 초코 블렌디드 있냐니, 그런거 없고 카카오 블렌디드 있다구요? 제가 메뉴명을 틀리게말했을지라도 그렇게 설명하시는건 아닌거같은데요? 그 뒤로도 아이스아메리카노, 잠봉뵈르 말하니 말끊으시고 커피는 고소한거 신거있어요 ㅋㅋㅋㅋㅋㅋ 잠봉뵈르도 굳이 프레첼 잠봉.. 아 저 길쭉한거 말씀하시는거죠? 라고 굳이 말을 끊으시면서까지 메뉴명을 정정해주실필요가 있었나 싶네요. 정말 기분나쁜 직원분 꼭 읽고 잘못된점이 뭔지 아셨으면 좋겠습니다.",
             "normScore": "normScore",
-            "userId": "1121063466",
+            "userId": null,
             "restaurnatId": "restaurant_id",
             "level": "4",
             "createAt": "2021.08.08."
@@ -148,7 +148,7 @@
             "reviewScore": 5,
             "description": "화장실이 좀 불편하지만 내부가 넓고 분위기 좋아요\n공부하기도 좋고 흑임자스콘 진짜 맛있어요 !\n재방문의사 있음",
             "normScore": "normScore",
-            "userId": "804334244",
+            "userId": null,
             "restaurnatId": "restaurant_id",
             "level": "46",
             "createAt": "2021.07.08."
@@ -157,7 +157,7 @@
             "reviewScore": 1,
             "description": "아아 주문하고 9분, 아무 말없이 기다리다 물어보니 그제서야 해드리겠다고,, 취소 안되냐니 지금 해준다고,,, 그리고 또 몇분 ,,, 난 왜 아무 말도 못 듣고 기다려야 하는 걸까 ,,, 다시는 안 가지 싶다 어웨이크갈걸,,,,",
             "normScore": "normScore",
-            "userId": "521693419",
+            "userId": null,
             "restaurnatId": "restaurant_id",
             "level": "31",
             "createAt": "2021.06.05."
@@ -166,7 +166,7 @@
             "reviewScore": 5,
             "description": "직원들 친절하고 커피도 가성비 좋아요. 졸업하고도 종종오게 되네요. 부대에서 최애 존맛탱 카펩니다",
             "normScore": "normScore",
-            "userId": "770616557",
+            "userId": null,
             "restaurnatId": "restaurant_id",
             "level": "17",
             "createAt": "2021.02.28."
@@ -175,7 +175,7 @@
             "reviewScore": 1,
             "description": "직원들이 인식이 너무 없음. 빨대 필요없다고 말해도 무의식적으로 꽂아서 음료 주는 게 한두 번이 아님.. 전에 갔을 때는 딸기타르트에 곰팡이도 피어있어서 같이 간 친구는 이제 다시는 여기 안 감. 물론 저렴하고 위치가 좋아서 인기있는 가게지만.. 여러모로 좀 신경쓰셔야 될거같아요",
             "normScore": "normScore",
-            "userId": "797032157",
+            "userId": null,
             "restaurnatId": "restaurant_id",
             "level": "44",
             "createAt": "2020.12.09."
@@ -184,7 +184,7 @@
             "reviewScore": 1,
             "description": "커피맛은 잘 모르겠습니다.. 직원분이 너무 불친절해서 마시지않고 나왔네요.",
             "normScore": "normScore",
-            "userId": "1337433965",
+            "userId": null,
             "restaurnatId": "restaurant_id",
             "level": "2",
             "createAt": "2020.10.27."
@@ -193,7 +193,7 @@
             "reviewScore": 5,
             "description": "마이써용 헿",
             "normScore": "normScore",
-            "userId": "426434666",
+            "userId": null,
             "restaurnatId": "restaurant_id",
             "level": "21",
             "createAt": "2020.10.04."
@@ -202,7 +202,7 @@
             "reviewScore": 5,
             "description": "",
             "normScore": "normScore",
-            "userId": "1400769737",
+            "userId": null,
             "restaurnatId": "restaurant_id",
             "level": "6",
             "createAt": "2020.09.14."
@@ -211,7 +211,7 @@
             "reviewScore": 5,
             "description": "커피맛도 좋고 공부하기 좋아서 자주 갔었음",
             "normScore": "normScore",
-            "userId": "1254691742",
+            "userId": null,
             "restaurnatId": "restaurant_id",
             "level": "20",
             "createAt": "2020.08.07."
@@ -220,7 +220,7 @@
             "reviewScore": 5,
             "description": "와 체리바질스무디 너무 맛있어요. 아인슈페너도 원두 고를 수 있어서 좋네요",
             "normScore": "normScore",
-            "userId": "913468140",
+            "userId": null,
             "restaurnatId": "restaurant_id",
             "level": "20",
             "createAt": "2020.07.31."
@@ -229,7 +229,7 @@
             "reviewScore": 5,
             "description": "",
             "normScore": "normScore",
-            "userId": "488490472",
+            "userId": null,
             "restaurnatId": "restaurant_id",
             "level": "19",
             "createAt": "2020.06.06."
@@ -238,7 +238,7 @@
             "reviewScore": 5,
             "description": "여기 맛있고 가격도 좋아요♥",
             "normScore": "normScore",
-            "userId": "1340737392",
+            "userId": null,
             "restaurnatId": "restaurant_id",
             "level": "5",
             "createAt": "2020.05.06."
@@ -247,7 +247,7 @@
             "reviewScore": 5,
             "description": "최애카페 ㅠㅠ",
             "normScore": "normScore",
-            "userId": "1011761335",
+            "userId": null,
             "restaurnatId": "restaurant_id",
             "level": "13",
             "createAt": "2020.02.21."
@@ -256,7 +256,7 @@
             "reviewScore": 5,
             "description": "먹어봤던 음료와 빵이 다 맛있어요",
             "normScore": "normScore",
-            "userId": "384296435",
+            "userId": null,
             "restaurnatId": "restaurant_id",
             "level": "3",
             "createAt": "2019.12.12."
@@ -265,7 +265,7 @@
             "reviewScore": 5,
             "description": "홍차블랜디드 완전 맛있음\n많이 달지도 않구 딱 좋아요",
             "normScore": "normScore",
-            "userId": "541171670",
+            "userId": null,
             "restaurnatId": "restaurant_id",
             "level": "9",
             "createAt": "2019.08.22."
@@ -274,7 +274,7 @@
             "reviewScore": 5,
             "description": "블렌디드 bbbb",
             "normScore": "normScore",
-            "userId": "403990750",
+            "userId": null,
             "restaurnatId": "restaurant_id",
             "level": "18",
             "createAt": "2018.12.17."
@@ -283,7 +283,7 @@
             "reviewScore": 5,
             "description": "",
             "normScore": "normScore",
-            "userId": "354212540",
+            "userId": null,
             "restaurnatId": "restaurant_id",
             "level": "4",
             "createAt": "2018.11.27."

@@ -35,6 +35,8 @@ def review_print():
 def review_crawler():
     # 리뷰어 정보
     review_list = driver.find_elements(By.CSS_SELECTOR, '.evaluation_review > .list_evaluation > li')
+    # 유저 개인 프로필
+    user_profiles = driver.find_elements(By.CSS_SELECTOR, '.evaluation_review > .list_evaluation > li > .profile_info')
 
     # 유저 평균평점, 후기 개수
     user_info = driver.find_elements(By.CSS_SELECTOR, '.unit_info > .txt_desc')
@@ -90,7 +92,7 @@ def review_crawler():
         }
 
         user_dict['유저 정보'].append(dict_temp)
-        print(f'{user_name} ...완료')
+        print(f'유저 {user_name} 정보 ...완료')
 
 
         #리뷰 생성 날짜
@@ -125,6 +127,9 @@ def review_crawler():
 
         restaurant_review_dict['식당 리뷰 정보'].append(dict_temp)
         print(f'{user_name} ...완료')
+
+        # 유저별 리뷰 모으기
+        profile_info = user_profiles[i].click()
 
         i += 1
         user_review_cnt_index = i * 2
