@@ -1,3 +1,58 @@
 {
-    "식당 정보": []
+    "식당 정보": [
+        {
+            "name": "톤쇼우 부산대본점",
+            "restaurant_type": "돈까스,우동",
+            "averageScore": "4.1",
+            "normScore": "norm_score",
+            "reviewCount": "1,131",
+            "address1": "부산 금정구 금강로 247-10",
+            "address2": "장전동 419-21"
+        },
+        {
+            "name": "나오리쇼쿠 부산대점",
+            "restaurant_type": "일식집",
+            "averageScore": "4.3",
+            "normScore": "norm_score",
+            "reviewCount": "417",
+            "address1": "부산 금정구 금강로 271-14",
+            "address2": "장전동 409-14"
+        },
+        {
+            "name": "뉴숯불통닭 본점",
+            "restaurant_type": "치킨",
+            "averageScore": "3.9",
+            "normScore": "norm_score",
+            "reviewCount": "161",
+            "address1": "부산 금정구 금강로335번길 55 1층",
+            "address2": "장전동 146-2"
+        },
+        {
+            "name": "스시심",
+            "restaurant_type": "초밥,롤",
+            "averageScore": "3.9",
+            "normScore": "norm_score",
+            "reviewCount": "204",
+            "address1": "부산 금정구 금강로 279-1",
+            "address2": "장전동 419-7"
+        },
+        {
+            "name": "진국명가",
+            "restaurant_type": "국밥",
+            "averageScore": "3.9",
+            "normScore": "norm_score",
+            "reviewCount": "5",
+            "address1": "부산 금정구 금강로 271 1,2층",
+            "address2": "장전동 419-11"
+        },
+        {
+            "name": "델라고 부산대점",
+            "restaurant_type": "이탈리안",
+            "averageScore": "4.3",
+            "normScore": "norm_score",
+            "reviewCount": "86",
+            "address1": "부산 금정구 금강로 253-1 2층",
+            "address2": "장전동 419-18"
+        }
+    ]
 }

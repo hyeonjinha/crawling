@@ -49,10 +49,9 @@ def review_crawler():
     # 유저 레벨
     user_levels = driver.find_elements(By.CSS_SELECTOR, '.unit_info > .link_user > .inner_user > .badge_info > .txt_badge')
 
-    i = 0
-    user_review_cnt_index = 0
-    user_review_avg_index = 1
     for i in range(len(review_list)):
+        user_review_cnt_index = i * 2
+        user_review_avg_index = i * 2 + 1
         print(f"review_list{i} 출력")
 
         #유저 아이디
@@ -92,7 +91,7 @@ def review_crawler():
         print(review_created_date)
         
         # 유저 평점 계산
-        style_attr = driver.find_element(By.XPATH, f'//*[@id="mArticle"]/div[7]/div[3]/ul/li[{i+1}]/div[2]/div/span/span').get_attribute('style')
+        style_attr = driver.find_element(By.CSS_SELECTOR, '#mArticle > div.cont_evaluation > div.evaluation_review > ul > li:nth-child(1) > div.star_info > div > span > span').get_attribute('style')
         width_match = re.search(r'width: (\d+)%', style_attr)
         width_percentage = int(width_match.group(1))
         score = round((width_percentage / 100) * 5) # width 값에 따라 점수 계산 (예: 100% -> 5점)
@@ -122,10 +121,7 @@ def review_crawler():
 
         # 유저별 리뷰 모으기
         #profile_info = user_profiles[i].click()
-
-        i += 1
-        user_review_cnt_index = i * 2
-        user_review_avg_index = i * 2 + 1
+        
 
 
 url = 'https://place.map.kakao.com/19714690'
