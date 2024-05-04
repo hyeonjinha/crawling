@@ -111,7 +111,7 @@ def crawler():
         # 리뷰어 정보
         review_list = driver.find_elements(By.CSS_SELECTOR, '.evaluation_review > .list_evaluation > li')
         # 유저 개인 프로필
-        user_profiles = driver.find_elements(By.CSS_SELECTOR, '.evaluation_review > .list_evaluation > li > .profile_info')
+        # user_profiles = driver.find_elements(By.CSS_SELECTOR, '.evaluation_review > .list_evaluation > li > .profile_info')
 
         # 유저 평균평점, 후기 개수
         user_info = driver.find_elements(By.CSS_SELECTOR, '.unit_info > .txt_desc')
@@ -182,6 +182,7 @@ def crawler():
                 print("리뷰 내용 오류")
 
             dict_temp = {
+                'restaurantName': restaurant_name,
                 'reviewScore': score,
                 'description': user_description,
                 'normScore' : "normScore", # 추후 추가

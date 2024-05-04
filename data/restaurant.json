@@ -14,7 +14,7 @@
             "restaurant_type": "일식집",
             "averageScore": "4.3",
             "normScore": "norm_score",
-            "reviewCount": "417",
+            "reviewCount": "418",
             "address1": "부산 금정구 금강로 271-14",
             "address2": "장전동 409-14"
         },
@@ -53,6 +53,24 @@
             "reviewCount": "86",
             "address1": "부산 금정구 금강로 253-1 2층",
             "address2": "장전동 419-18"
+        },
+        {
+            "name": "코하루",
+            "restaurant_type": "일본식라면",
+            "averageScore": "3.8",
+            "normScore": "norm_score",
+            "reviewCount": "332",
+            "address1": "부산 금정구 부산대학로38번길 16 1층",
+            "address2": "장전동 412-22"
+        },
+        {
+            "name": "모시모시",
+            "restaurant_type": "초밥,롤",
+            "averageScore": "",
+            "normScore": "norm_score",
+            "reviewCount": "70",
+            "address1": "부산 금정구 금강로 271-5 1층",
+            "address2": "장전동 401-5"
         }
     ]
 }
