@@ -5,7 +5,7 @@
             "restaurant_type": "돈까스,우동",
             "averageScore": "4.1",
             "normScore": "norm_score",
-            "reviewCount": "1,131",
+            "reviewCount": "1,132",
             "address1": "부산 금정구 금강로 247-10",
             "address2": "장전동 419-21"
         },
@@ -23,7 +23,7 @@
             "restaurant_type": "치킨",
             "averageScore": "3.9",
             "normScore": "norm_score",
-            "reviewCount": "161",
+            "reviewCount": "162",
             "address1": "부산 금정구 금강로335번길 55 1층",
             "address2": "장전동 146-2"
         },
@@ -32,7 +32,7 @@
             "restaurant_type": "초밥,롤",
             "averageScore": "3.9",
             "normScore": "norm_score",
-            "reviewCount": "204",
+            "reviewCount": "205",
             "address1": "부산 금정구 금강로 279-1",
             "address2": "장전동 419-7"
         },
@@ -59,7 +59,7 @@
             "restaurant_type": "일본식라면",
             "averageScore": "3.8",
             "normScore": "norm_score",
-            "reviewCount": "332",
+            "reviewCount": "330",
             "address1": "부산 금정구 부산대학로38번길 16 1층",
             "address2": "장전동 412-22"
         },
@@ -71,6 +71,51 @@
             "reviewCount": "70",
             "address1": "부산 금정구 금강로 271-5 1층",
             "address2": "장전동 401-5"
+        },
+        {
+            "name": "수림식당",
+            "restaurant_type": "중식",
+            "averageScore": "4.0",
+            "normScore": "norm_score",
+            "reviewCount": "205",
+            "address1": "부산 금정구 금샘로 7",
+            "address2": "장전동 505-6"
+        },
+        {
+            "name": "카페테제",
+            "restaurant_type": "카페",
+            "averageScore": "3.8",
+            "normScore": "norm_score",
+            "reviewCount": "4",
+            "address1": "부산 금정구 금강로 248-7 2층",
+            "address2": "장전동 420-8"
+        },
+        {
+            "name": "개성상인",
+            "restaurant_type": "삼겹살",
+            "averageScore": "4.1",
+            "normScore": "norm_score",
+            "reviewCount": "87",
+            "address1": "부산 금정구 금강로 248-5 2층",
+            "address2": "장전동 420-28"
+        },
+        {
+            "name": "카츠안",
+            "restaurant_type": "돈까스,우동",
+            "averageScore": "3.9",
+            "normScore": "norm_score",
+            "reviewCount": "56",
+            "address1": "부산 금정구 금정로 59-8 1층",
+            "address2": "장전동 421-13"
+        },
+        {
+            "name": "포맨티코",
+            "restaurant_type": "베트남음식",
+            "averageScore": "4.5",
+            "normScore": "norm_score",
+            "reviewCount": "88",
+            "address1": "부산 금정구 장전로12번길 16 1층",
+            "address2": "장전동 293-196"
         }
     ]
 }
