@@ -2,13 +2,14 @@ import json
 import time
 from time import sleep
 import re
-import user_crawler
+import review_crawler
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.common.exceptions import NoSuchElementException
 
 # --크롬창을 숨기고 실행-- driver에 options를 추가해주면된다
 # options = webdriver.ChromeOptions()
@@ -97,8 +98,15 @@ def crawler():
         driver.switch_to.window(driver.window_handles[1])
         # css를 찾을때 까지 10초 대기
         time_wait(10, '#mArticle > div.cont_essential > div:nth-child(1) > div.place_details')
-            
-        driver.find_element(By.XPATH, '//*[@id="mArticle"]/div[1]/div[1]/div[2]/div/div[2]/a[2]').send_keys(Keys.ENTER)
+        
+        try:
+            driver.find_element(By.XPATH, '//*[@id="mArticle"]/div[1]/div[1]/div[2]/div/div[2]/a[2]').send_keys(Keys.ENTER)
+        except NoSuchElementException:
+            # '후기 미제공'일 경우
+            print("후기가 존재하지 않습니다.")
+            driver.close() # 현재 탭 닫기
+            driver.switch_to.window(driver.window_handles[0])  # 기존 탭으로 전환
+            continue
 
         #리뷰 더보기 버튼 클릭
         more = (driver.find_element(By.CSS_SELECTOR, '#mArticle > div.cont_evaluation > div.evaluation_review > .link_more')).text
@@ -127,13 +135,16 @@ def crawler():
 
         # 유저 프로필 링크
         user_profile_links = driver.find_elements(By.CSS_SELECTOR, '.evaluation_review > .list_evaluation > li > a')
-            
-        tmp_resaurant_dict = {f'{restaurant_name} 리뷰 정보' : []}
+        
+        tmp_resaurant_dict = {f'{restaurant_name}' : []}
         for i in range(len(review_list)):
             user_review_cnt_index = i * 2
             user_review_avg_index = i * 2 + 1
             print(f"review_list{i} 출력")
             
+            #유저 프로필 링크
+            user_profile_links_dict['links'].append(user_profile_links[i].get_attribute('href'))
+
             #유저 아이디
             user_id = review_list[i].get_attribute('data-userid')
             print(user_id)
@@ -195,15 +206,20 @@ def crawler():
                 'createAt': review_created_date
             }
             
-            tmp_resaurant_dict[f'{restaurant_name} 리뷰 정보'].append(dict_temp)
+            tmp_resaurant_dict[f'{restaurant_name}'].append(dict_temp)
             print(f'{user_name} ...완료')
 
             ############################################################################################################################################################
             # 유저별 리뷰모으기
             ############################################################################################################################################################
-            #user_profile_links[i].send_keys(Keys.ENTER)
-            #print("유저별 리뷰 크롤링 시작")
-            #user_crawler(user_profile_links)
+            '''
+            user_profile_links[i].send_keys(Keys.ENTER)
+            driver.switch_to.window(driver.window_handles[2])
+            print("유저별 리뷰 크롤링 시작")
+            user_reviews_dict['유저별 리뷰 정보'].append(review_crawler.review_crawler())
+            driver.close() # 현재 탭 닫기
+            driver.switch_to.window(driver.window_handles[1])  # 기존 탭으로 전환
+            '''
             
         restaurant_review_dict['식당 리뷰 정보'].append(tmp_resaurant_dict)
         driver.close() # 현재 탭 닫기
@@ -236,7 +252,7 @@ restaurant_dict = {'식당 정보': []}
 user_dict = {'유저 정보': []}
 restaurant_review_dict = {'식당 리뷰 정보': []}
 user_reviews_dict = {'유저별 리뷰 정보': []}
-
+user_profile_links_dict = {'links': []}
 # 시작시간
 start = time.time()
 print('[크롤링 시작...]')
@@ -295,3 +311,6 @@ with open('data/user_dict.json', 'w', encoding='utf-8') as f:
 
 with open('data/restaurant_review_dict.json', 'w', encoding='utf-8') as f:
     json.dump(restaurant_review_dict, f, indent=4, ensure_ascii=False)
+
+with open('data/user_profile_links_dict.json', 'w', encoding='utf-8') as f:
+    json.dump(user_profile_links_dict, f, indent=4, ensure_ascii=False)
