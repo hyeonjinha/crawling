@@ -2,6 +2,7 @@ import json
 import time
 from time import sleep
 import re
+import user_crawler
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -85,9 +86,10 @@ def crawler():
 
         restaurant_dict['식당 정보'].append(dict_temp)
         print(f'{restaurant_name} ...완료')
-
 ############################################################################################################################################################
-        # crawl details
+# crawl details
+############################################################################################################################################################
+        
         details[index].send_keys(Keys.ENTER)
 
         print("후기 크롤링 시작")
@@ -108,11 +110,9 @@ def crawler():
         print("후기 더보기 완료")
         
 
-        # 리뷰어 정보
+        # 리뷰 정보
         review_list = driver.find_elements(By.CSS_SELECTOR, '.evaluation_review > .list_evaluation > li')
-        # 유저 개인 프로필
-        # user_profiles = driver.find_elements(By.CSS_SELECTOR, '.evaluation_review > .list_evaluation > li > .profile_info')
-
+        
         # 유저 평균평점, 후기 개수
         user_info = driver.find_elements(By.CSS_SELECTOR, '.unit_info > .txt_desc')
 
@@ -125,7 +125,10 @@ def crawler():
         # 유저 레벨
         user_levels = driver.find_elements(By.CSS_SELECTOR, '.unit_info > .link_user > .inner_user > .badge_info > .txt_badge')
 
-        
+        # 유저 프로필 링크
+        user_profile_links = driver.find_elements(By.CSS_SELECTOR, '.evaluation_review > .list_evaluation > li > a')
+            
+        tmp_resaurant_dict = {f'{restaurant_name} 리뷰 정보' : []}
         for i in range(len(review_list)):
             user_review_cnt_index = i * 2
             user_review_avg_index = i * 2 + 1
@@ -182,7 +185,6 @@ def crawler():
                 print("리뷰 내용 오류")
 
             dict_temp = {
-                'restaurantName': restaurant_name,
                 'reviewScore': score,
                 'description': user_description,
                 'normScore' : "normScore", # 추후 추가
@@ -192,18 +194,23 @@ def crawler():
                 'level': user_level,
                 'createAt': review_created_date
             }
-
-            restaurant_review_dict['식당 리뷰 정보'].append(dict_temp)
+            
+            tmp_resaurant_dict[f'{restaurant_name} 리뷰 정보'].append(dict_temp)
             print(f'{user_name} ...완료')
 
-            # 유저별 리뷰 모으기
-            # profile_info = user_profiles[i].click()
-
+            ############################################################################################################################################################
+            # 유저별 리뷰모으기
+            ############################################################################################################################################################
+            #user_profile_links[i].send_keys(Keys.ENTER)
+            #print("유저별 리뷰 크롤링 시작")
+            #user_crawler(user_profile_links)
+            
+        restaurant_review_dict['식당 리뷰 정보'].append(tmp_resaurant_dict)
         driver.close() # 현재 탭 닫기
         driver.switch_to.window(driver.window_handles[0])  # 기존 탭으로 전환
             
 ############################################################################################################################################################
-
+############################################################################################################################################################
 
 # css를 찾을때 까지 10초 대기
 time_wait(10, 'div.box_searchbar > input.query')
@@ -228,6 +235,8 @@ restaurant_list = driver.find_elements(By.CSS_SELECTOR, '.placelist > .PlaceItem
 restaurant_dict = {'식당 정보': []}
 user_dict = {'유저 정보': []}
 restaurant_review_dict = {'식당 리뷰 정보': []}
+user_reviews_dict = {'유저별 리뷰 정보': []}
+
 # 시작시간
 start = time.time()
 print('[크롤링 시작...]')
