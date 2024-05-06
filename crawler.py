@@ -2,7 +2,6 @@ import json
 import time
 from time import sleep
 import re
-import review_crawler
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -10,6 +9,12 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import NoSuchElementException
+# dictionary 생성
+restaurant_dict = {'식당 정보': []}
+user_dict = {'유저 정보': []}
+restaurant_review_dict = {'식당 리뷰 정보': []}
+user_reviews_dict = {'유저별 리뷰 정보': []}
+user_profile_links_dict = {'links': []}
 
 # --크롬창을 숨기고 실행-- driver에 options를 추가해주면된다
 # options = webdriver.ChromeOptions()
@@ -21,10 +26,20 @@ driver.get(url)
 key_word = '부산 금정구 부산대학교 주변 식당'  # 검색어
 
 # css 찾을때 까지 10초대기
-def time_wait(num, code):
+def css_time_wait(num, code):
     try:
         wait = WebDriverWait(driver, num).until(
             EC.presence_of_element_located((By.CSS_SELECTOR, code)))
+    except:
+        print(code, '태그를 찾지 못하였습니다.')
+        driver.quit()
+    return wait
+
+# xpath 찾을때 까지 10초대기
+def xpath_time_wait(num, code):
+    try:
+        wait = WebDriverWait(driver, num).until(
+            EC.presence_of_element_located((By.XPATH, code)))
     except:
         print(code, '태그를 찾지 못하였습니다.')
         driver.quit()
@@ -97,7 +112,7 @@ def crawler():
         # 상세정보 탭으로 변환
         driver.switch_to.window(driver.window_handles[1])
         # css를 찾을때 까지 10초 대기
-        time_wait(10, '#mArticle > div.cont_essential > div:nth-child(1) > div.place_details')
+        css_time_wait(10, '#mArticle > div.cont_essential > div:nth-child(1) > div.place_details')
         
         try:
             driver.find_element(By.XPATH, '//*[@id="mArticle"]/div[1]/div[1]/div[2]/div/div[2]/a[2]').send_keys(Keys.ENTER)
@@ -143,7 +158,7 @@ def crawler():
             print(f"review_list{i} 출력")
             
             #유저 프로필 링크
-            user_profile_links_dict['links'].append(user_profile_links[i].get_attribute('href'))
+            #user_profile_links_dict['links'].append(user_profile_links[i].get_attribute('href'))
 
             #유저 아이디
             user_id = review_list[i].get_attribute('data-userid')
@@ -212,11 +227,15 @@ def crawler():
             ############################################################################################################################################################
             # 유저별 리뷰모으기
             ############################################################################################################################################################
-            '''
-            user_profile_links[i].send_keys(Keys.ENTER)
+            
+            '''user_profile_links[i].send_keys(Keys.ENTER)
             driver.switch_to.window(driver.window_handles[2])
+            xpath_time_wait(10, '//*[@id="info.other"]/div[1]/div/div[2]')
             print("유저별 리뷰 크롤링 시작")
-            user_reviews_dict['유저별 리뷰 정보'].append(review_crawler.review_crawler())
+            link = driver.current_url
+            user_profile_links_dict['links'].append(link)
+            print(link)
+            #user_reviews_dict['유저별 리뷰 정보'].append(review_crawler.review_crawler())
             driver.close() # 현재 탭 닫기
             driver.switch_to.window(driver.window_handles[1])  # 기존 탭으로 전환
             '''
@@ -228,89 +247,87 @@ def crawler():
 ############################################################################################################################################################
 ############################################################################################################################################################
 
-# css를 찾을때 까지 10초 대기
-time_wait(10, 'div.box_searchbar > input.query')
+def main():
+    # css를 찾을때 까지 10초 대기
+    css_time_wait(10, 'div.box_searchbar > input.query')
 
-# (1) 검색창 찾기
-search = driver.find_element(By.CSS_SELECTOR, 'div.box_searchbar > input.query')
-search.send_keys(key_word)  # 검색어 입력
-search.send_keys(Keys.ENTER)  # 엔터버튼 누르기
+    # (1) 검색창 찾기
+    search = driver.find_element(By.CSS_SELECTOR, 'div.box_searchbar > input.query')
+    search.send_keys(key_word)  # 검색어 입력
+    search.send_keys(Keys.ENTER)  # 엔터버튼 누르기
 
-sleep(1)
+    sleep(1)
 
-# (2) 장소 탭 클릭
-place_tab = driver.find_element(By.CSS_SELECTOR, '#info\.main\.options > li.option1 > a')
-place_tab.send_keys(Keys.ENTER)
+    # (2) 장소 탭 클릭
+    place_tab = driver.find_element(By.CSS_SELECTOR, '#info\.main\.options > li.option1 > a')
+    place_tab.send_keys(Keys.ENTER)
 
-sleep(1)
+    sleep(1)
 
-# 주차장 리스트
-restaurant_list = driver.find_elements(By.CSS_SELECTOR, '.placelist > .PlaceItem')
+    # 식당 리스트
+    restaurant_list = driver.find_elements(By.CSS_SELECTOR, '.placelist > .PlaceItem')
 
-# dictionary 생성
-restaurant_dict = {'식당 정보': []}
-user_dict = {'유저 정보': []}
-restaurant_review_dict = {'식당 리뷰 정보': []}
-user_reviews_dict = {'유저별 리뷰 정보': []}
-user_profile_links_dict = {'links': []}
-# 시작시간
-start = time.time()
-print('[크롤링 시작...]')
 
-# 페이지 리스트만큼 크롤링하기
-page = 1    # 현재 크롤링하는 페이지가 전체에서 몇번째 페이지인지
-page2 = 0   # 1 ~ 5번째 중 몇번째인지
-error_cnt = 0
+    # 시작시간
+    start = time.time()
+    print('[크롤링 시작...]')
 
-while 1:
+    # 페이지 리스트만큼 크롤링하기
+    page = 1    # 현재 크롤링하는 페이지가 전체에서 몇번째 페이지인지
+    page2 = 0   # 1 ~ 5번째 중 몇번째인지
+    error_cnt = 0
 
-    # 페이지 넘어가며 출력
-    try:
-        page2 += 1
-        print("**", page, "**")
+    while 1:
 
-		# (7) 페이지 번호 클릭
-        driver.find_element(By.XPATH, f'//*[@id="info.search.page.no{page2}"]').send_keys(Keys.ENTER)
+        # 페이지 넘어가며 출력
+        try:
+            page2 += 1
+            print("**", page, "**")
 
-		# 주차장 리스트 크롤링
-        crawler()
+            # (7) 페이지 번호 클릭
+            driver.find_element(By.XPATH, f'//*[@id="info.search.page.no{page2}"]').send_keys(Keys.ENTER)
 
-		# 해당 페이지 주차장 리스트
-        restaurant_list = driver.find_elements(By.CSS_SELECTOR, '.placelist > .PlaceItem')
-		# 한 페이지에 장소 개수가 15개 미만이라면 해당 페이지는 마지막 페이지
-        if len(restaurant_list) < 15:
-            break
-		# 다음 버튼을 누를 수 없다면 마지막 페이지
-        if not driver.find_element(By.XPATH, '//*[@id="info.search.page.next"]').is_enabled():
-            break
+            # 주차장 리스트 크롤링
+            crawler()
 
-        # (8) 다섯번째 페이지까지 왔다면 다음 버튼을 누르고 page2 = 0으로 초기화
-        if page2 % 5 == 0:
-            driver.find_element(By.XPATH, '//*[@id="info.search.page.next"]').send_keys(Keys.ENTER)
-            page2 = 0
+            # 해당 페이지 주차장 리스트
+            restaurant_list = driver.find_elements(By.CSS_SELECTOR, '.placelist > .PlaceItem')
+            # 한 페이지에 장소 개수가 15개 미만이라면 해당 페이지는 마지막 페이지
+            if len(restaurant_list) < 15:
+                break
+            # 다음 버튼을 누를 수 없다면 마지막 페이지
+            if not driver.find_element(By.XPATH, '//*[@id="info.search.page.next"]').is_enabled():
+                break
 
-        page += 1
+            # (8) 다섯번째 페이지까지 왔다면 다음 버튼을 누르고 page2 = 0으로 초기화
+            if page2 % 5 == 0:
+                driver.find_element(By.XPATH, '//*[@id="info.search.page.next"]').send_keys(Keys.ENTER)
+                page2 = 0
 
-    except Exception as e:
-        error_cnt += 1
-        print(e)
-        print('ERROR!' * 3)
+            page += 1
 
-        if error_cnt > 5:
-            break
+        except Exception as e:
+            error_cnt += 1
+            print(e)
+            print('ERROR!' * 3)
 
-print('[데이터 수집 완료]\n소요 시간 :', time.time() - start)
-driver.quit()  # 작업이 끝나면 창을 닫는다.
+            if error_cnt > 5:
+                break
 
-# json 파일로 저장
-with open('data/restaurant.json', 'w', encoding='utf-8') as f:
-    json.dump(restaurant_dict, f, indent=4, ensure_ascii=False)
+    print('[데이터 수집 완료]\n소요 시간 :', time.time() - start)
+    driver.quit()  # 작업이 끝나면 창을 닫는다.
 
-with open('data/user_dict.json', 'w', encoding='utf-8') as f:
-    json.dump(user_dict, f, indent=4, ensure_ascii=False)
+    # json 파일로 저장
+    with open('data/restaurant.json', 'w', encoding='utf-8') as f:
+        json.dump(restaurant_dict, f, indent=4, ensure_ascii=False)
 
-with open('data/restaurant_review_dict.json', 'w', encoding='utf-8') as f:
-    json.dump(restaurant_review_dict, f, indent=4, ensure_ascii=False)
+    with open('data/user_dict.json', 'w', encoding='utf-8') as f:
+        json.dump(user_dict, f, indent=4, ensure_ascii=False)
 
-with open('data/user_profile_links_dict.json', 'w', encoding='utf-8') as f:
-    json.dump(user_profile_links_dict, f, indent=4, ensure_ascii=False)
+    with open('data/restaurant_review_dict.json', 'w', encoding='utf-8') as f:
+        json.dump(restaurant_review_dict, f, indent=4, ensure_ascii=False)
+
+    with open('data/user_profile_links_dict.json', 'w', encoding='utf-8') as f:
+        json.dump(user_profile_links_dict, f, indent=4, ensure_ascii=False)
+
+main()
