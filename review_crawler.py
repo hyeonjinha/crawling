@@ -9,9 +9,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-url = 'https://map.kakao.com/?target=other&tab=review&mapuserid=746285447'
-driver = webdriver.Chrome() # 크롬창 숨기기
-driver.get(url)
 
 # css 찾을때 까지 10초대기
 def time_wait(num, code):
@@ -25,28 +22,37 @@ def time_wait(num, code):
 
 def user_review_crawler():
 
-    time.sleep(0.2)
+    time.sleep(0.4)
 
 	# (3) 각 요소들 전체 긁어오기
     review_list = driver.find_elements(By.CSS_SELECTOR, '.list_body > .FavoriteEvaluationItem')
     names = driver.find_elements(By.CSS_SELECTOR, '.list_body > .FavoriteEvaluationItem > .group_tit > .tit_evaluation > .link_txt')
-    ratings = driver.find_elements(By.CSS_SELECTOR, '.list_body > .FavoriteEvaluationItem > .rating > .score > em')
+    #ratings = driver.find_elements(By.CSS_SELECTOR, '.list_body > .FavoriteEvaluationItem > .rating > .score > em')
     created_dates = driver.find_elements(By.CSS_SELECTOR, '.list_body > .FavoriteEvaluationItem > .rating > .num_date')
     descriptions = driver.find_elements(By.CSS_SELECTOR, '.list_body > .FavoriteEvaluationItem > .desc_directory')
-
+    tmp_review_dict = {f'{user_name}' : []} 
     for index in range(len(review_list)):
         print(index)
+        try:
+            result = driver.switch_to_alert()
+            result.dismiss()
+        except:
+            pass
 
 		# 식당 이름
         restaurant_name = names[index].text
         names[index].send_keys(Keys.ENTER)
         print(restaurant_name)
-
+       
 		# 별점
-        review_score = ratings[index].text
+        style_attr = driver.find_element(By.CSS_SELECTOR, f'#other\.review > ul > li:nth-child({i+1}) > div.rating > span.score > span.backgroundStar > span').get_attribute('style')
+        width_match = re.search(r'width: (\d+)px', style_attr)
+        width_percentage = int(width_match.group(1))
+        review_score = round((width_percentage / 68) * 5) # width 값에 따라 점수 계산 (예: 100% -> 5점)
         print(review_score)
 
         # 리뷰 내용
+        
         description = descriptions[index].text
         print(description)
 
@@ -62,8 +68,16 @@ def user_review_crawler():
             'createdAt': created_date,
         }
 
-        user_reviews_dict[f'{user_name}'].append(dict_temp)
-        print(f'{restaurant_name} ...완료')
+        tmp_review_dict[f'{user_name}'].append(dict_temp)
+        try:
+            result = driver.switch_to_alert()
+            result.dismiss()
+        except:
+            pass
+        
+
+    user_reviews_dict['유저별 리뷰 정보'].append(tmp_review_dict)
+    print(f'{user_name} ...완료')
 
 def review_crawler():
     
@@ -84,8 +98,6 @@ def review_crawler():
     user_name = driver.find_elements(By.CSS_SELECTOR, '#info\.other > div.header > div > div.FavoriteOtherProfile > div.wrap_user > strong')
 
     # dictionary 생성
-    global user_reviews_dict
-    user_reviews_dict = {f'{user_name}': []}
 
     # 시작시간
     start = time.time()
@@ -107,7 +119,7 @@ def review_crawler():
                 print("**", page, "**")
 
                 # (7) 페이지 번호 클릭
-                driver.find_element(By.XPATH, f'//*[@id="info.search.page.no{page2}"]').send_keys(Keys.ENTER)
+                driver.find_element(By.XPATH, f'//*[@id="other.review.page.no{page2}"]').send_keys(Keys.ENTER)
                 
                 # 주차장 리스트 크롤링
                 user_review_crawler()
@@ -119,12 +131,12 @@ def review_crawler():
                 if len(review_list) < 15:
                     break
                 # 다음 버튼을 누를 수 없다면 마지막 페이지
-                if not driver.find_element(By.XPATH, '//*[@id="info.search.page.next"]').is_enabled():
+                if not driver.find_element(By.XPATH, '//*[@id="other.review..page.next"]').is_enabled():
                     break
 
                 # (8) 다섯번째 페이지까지 왔다면 다음 버튼을 누르고 page2 = 0으로 초기화
                 if page2 % 5 == 0:
-                    driver.find_element(By.XPATH, '//*[@id="info.search.page.next"]').send_keys(Keys.ENTER)
+                    driver.find_element(By.XPATH, '//*[@id="other.review.page.next"]').send_keys(Keys.ENTER)
                     page2 = 0
 
                 page += 1
@@ -134,11 +146,26 @@ def review_crawler():
                 print(e)
                 print('ERROR!' * 3)
 
-                if error_cnt > 5:
-                    break
 
     print('[데이터 수집 완료]\n소요 시간 :', time.time() - start)
-    print(user_reviews_dict)
+    #print(user_reviews_dict)
     #return user_reviews_dict
 
-review_crawler()
+with open('C:.\\data\\user_profile_links_dict.json', 'r') as f:
+
+    json_data = json.load(f)
+
+links = json_data['links']
+
+global user_reviews_dict
+user_reviews_dict = {'유저별 리뷰 정보': []}
+
+for i in range(len(links)):
+    url = links[i]
+    driver = webdriver.Chrome() # 크롬창 숨기기
+    driver.get(url)
+    review_crawler()
+    driver.quit()
+
+with open('data/user_reviews_dict.json', 'w', encoding='utf-8') as f:
+        json.dump(user_reviews_dict, f, indent=4, ensure_ascii=False)
